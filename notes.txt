@@ -1,0 +1,46 @@
+Access ADLSG2 from Databricks:
+
+1. Access Keys from Containers
+2. SAS tokens (Shared Access Tokens) from containers
+3. Cluster Scope Access (Not recommended, Setup while configuering the cluster or edit and add spark config of access 
+keys or SAS tokens)
+4.Azure Active Directory - ADD: Databricks authenticates to ADD thn ADD authenticates to ALDSG2. Configure while creating clusters in advanced options
+by ticking Enable credential passthrough for user-level data access.
+5. Service Principles
+
+
+#cluster scope access using access keys for the course.
+for cluster scope add folowing config 
+fs.azure.account.<account_storage_name>.dfs.core.windows.net {{secrets/
+<secreat_scope_name>/<secreat_key>}}
+
+Section: 7 Securing Access to Azure Data Lake
+
+Services for keeping the keys secrets
+1. Databricks secret scope managed by databricks. can be confiured by db cli or api 
+2. Azure key vault backed secret scope
+
+can be combined to create more rigid solutions for the secret keys and tokens. 
+ 
+##First create azure key valult and add all the secrets, link it with databricks secret scope. After its read 
+for notebook, clusters and jobs. to get the secrets use dbutils.secrets.get 
+
+Steps:
+create Key valut, add key name and keys in azure. go to databricks onboarding page, edit the url and remove the word 
+onboarding, and add '#secrets/createScope'. hit enter. add DNS address and resource id.
+
+DNS: go to key valult then properties valut URI is the dns
+Resource ID : is resource ID
+
+# config spark while creating or starting a cluster to access storage acconts.
+
+in advence option of the cluster add a spark config.
+
+'fs.azure.account.key.<storage_acc_name>.dfs.core.windows.net {{secrets/
+<scope_name>/<secret_key>}}'
+
+
+##Section 8: upload files to DBFS FileStore
+
+go to account settings, advanced thn others enable dbfs. go to catelod from sidebar thn brows
+DBFS. thn upload files. works like a local store like colab. upload and driect access
