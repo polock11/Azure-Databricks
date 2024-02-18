@@ -1,3 +1,16 @@
+Topics Covered So far,
+1.Azure databricks cluster 
+2.cluster configuration
+3.cluster pool 
+4.data bricks utilities
+5.accessing ADLS Gen2 from data bricks using Access Keys SAS tokens, Service Principals, Cluster Scoped Authentication
+6.Secured Access from Azure Key Vault 
+7.Mounting DataLake containers to Databricks
+8.Data Ingestion, Processing, Transformation of various file fromats(csv,json, nested and multiline json) from ADLS in databricks with pySpark
+9.Databricks Notebook workflows
+10.Databricks Jobs 
+
+
 Access ADLSG2 from Databricks:
 
 1. Access Keys from Containers
@@ -44,3 +57,15 @@ in advence option of the cluster add a spark config.
 
 go to account settings, advanced thn others enable dbfs. go to catelod from sidebar thn brows
 DBFS. thn upload files. works like a local store like colab. upload and driect access
+
+
+
+
+# Hive meta store: to treat the data from various files, these files of data are needed to be registered  in a meta store. Databricks use Apache Hive Metastore for this.
+
+For the Hive meta store there are two storage options one is the data bricks default and other is external  meta store like Azure SQL or My SQL etc
+Once those tables are registered then they can be access form Spark SQL.
+
+
+
+A data bricks workspace can have a number database aka schemas. Databases can have number of tables and views. Two types of tables in Spark. Managed(metadata and files are managed by spark) and External(metadata managed by spark but files are managed externally). 
